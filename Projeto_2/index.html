@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Finanças</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">Controle de Finanças</h1>
+        <form id="transactionForm">
+            <div class="form-group">
+                <label for="description">Descrição</label>
+                <input type="text" class="form-control" id="description" required>
+            </div>
+            <div class="form-group">
+                <label for="value">Valor</label>
+                <input type="number" class="form-control" id="value" required>
+            </div>
+            <div class="form-group">
+                <label for="type">Tipo</label>
+                <select class="form-control" id="type" required>
+                    <option value="entrada">Entrada</option>
+                    <option value="saida">Saída</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Adicionar</button>
+        </form>
+
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody id="transactionTable">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let transactions = [];
+
+        function renderTransactions() {
+            let tbody = document.getElementById('transactionTable');
+            tbody.innerHTML = '';
+            transactions.forEach((transaction, index) => {
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${transaction.description}</td>
+                    <td>${transaction.value}</td>
+                    <td>${transaction.type}</td>
+                    <td>
+                        <button class="btn btn-warning" onclick="editTransaction(${index})">Editar</button>
+                        <button class="btn btn-danger" onclick="deleteTransaction(${index})">Excluir</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function addTransaction(e) {
+            e.preventDefault();
+            let description = document.getElementById('description').value;
+            let value = parseFloat(document.getElementById('value').value);
+            let type = document.getElementById('type').value;
+
+            transactions.push({ description, value, type });
+            renderTransactions();
+
+            document.getElementById('transactionForm').reset();
+        }
+
+        function deleteTransaction(index) {
+            transactions.splice(index, 1);
+            renderTransactions();
+        }
+
+        function editTransaction(index) {
+            let transaction = transactions[index];
+            document.getElementById('description').value = transaction.description;
+            document.getElementById('value').value = transaction.value;
+            document.getElementById('type').value = transaction.type;
+
+            transactions.splice(index, 1);
+            renderTransactions();
+        }
+
+        document.getElementById('transactionForm').addEventListener('submit', addTransaction);
+    </script>
+</body>
+</html'(.addEventListener)'submit', add>
