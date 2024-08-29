@@ -6,8 +6,11 @@
     <title>Login</title>
     <!-- Inclua os arquivos CSS do Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
+<div class="row">
+<div class=" col-md-4 col-sm-12">
     <div class="container mt-4">
         <h1>Login</h1>
         <form action="processa_login.php" method="post">
@@ -22,5 +25,7 @@
             <button type="submit" class="btn btn-primary">Entrar</button>
         </form>
     </div>
+</div>
+</div>
 </body>
 </html>
